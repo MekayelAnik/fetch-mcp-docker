@@ -7,7 +7,7 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/mekayelanik/fetch-mcp.svg?style=flat-square)](https://hub.docker.com/r/mekayelanik/fetch-mcp)
 [![Docker Stars](https://img.shields.io/docker/stars/mekayelanik/fetch-mcp.svg?style=flat-square)](https://hub.docker.com/r/mekayelanik/fetch-mcp)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/MekayelAnik/fetch-mcp-docker/refs/heads/main/LICENSE)
+[![License](https://img.shields.io/badge/license-GPL-blue.svg?style=flat-square)](https://raw.githubusercontent.com/MekayelAnik/fetch-mcp-docker/refs/heads/main/LICENSE)
 
 **[NPM Package](https://www.npmjs.com/package/fetch-mcp)** • **[GitHub Repository](https://github.com/mekayelanik/fetch-mcp-docker)** • **[Docker Hub](https://hub.docker.com/r/mekayelanik/fetch-mcp)**
 
