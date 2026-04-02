@@ -9,7 +9,7 @@
 [![Docker Stars](https://img.shields.io/docker/stars/mekayelanik/fetch-mcp.svg?style=flat-square)](https://hub.docker.com/r/mekayelanik/fetch-mcp)
 [![License](https://img.shields.io/badge/license-GPL-blue.svg?style=flat-square)](https://raw.githubusercontent.com/MekayelAnik/fetch-mcp-docker/refs/heads/main/LICENSE)
 
-**[NPM Package](https://www.npmjs.com/package/fetch-mcp)** • **[GitHub Repository](https://github.com/mekayelanik/fetch-mcp-docker)** • **[Docker Hub](https://hub.docker.com/r/mekayelanik/fetch-mcp)**
+**[NPM Package](https://www.npmjs.com/package/mcp-fetch-server)** • **[GitHub Repository](https://github.com/mekayelanik/fetch-mcp-docker)** • **[Docker Hub](https://hub.docker.com/r/mekayelanik/fetch-mcp)**
 
 </div>
 
@@ -737,7 +737,7 @@ curl -X POST http://localhost:8060/mcp \
 ## Resources & Support
 
 ### Documentation
-- 📦 [NPM Package](https://www.npmjs.com/package/fetch-mcp)
+- 📦 [NPM Package](https://www.npmjs.com/package/mcp-fetch-server)
 - 🔧 [GitHub Repository](https://github.com/mekayelanik/fetch-mcp-docker)
 - 🐳 [Docker Hub](https://hub.docker.com/r/mekayelanik/fetch-mcp)
 
@@ -840,7 +840,7 @@ deploy:
 
 Docker Image: GPL License - See [LICENSE](https://raw.githubusercontent.com/MekayelAnik/fetch-mcp-docker/refs/heads/main/LICENSE) for details.
 
-**Disclaimer:** Unofficial Docker image for [fetch-mcp](https://www.npmjs.com/package/fetch-mcp). Users are responsible for compliance with terms of service of fetched websites and applicable laws.
+**Disclaimer:** Unofficial Docker image for [mcp-fetch-server](https://www.npmjs.com/package/mcp-fetch-server). Users are responsible for compliance with terms of service of fetched websites and applicable laws.
 
 ---
 
