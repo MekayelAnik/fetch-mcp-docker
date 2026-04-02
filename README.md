@@ -3,8 +3,8 @@
 <p align="center">
   <a href="https://hub.docker.com/r/mekayelanik/fetch-mcp"><img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/mekayelanik/fetch-mcp?style=flat-square&logo=docker"></a>
   <a href="https://hub.docker.com/r/mekayelanik/fetch-mcp"><img alt="Docker Stars" src="https://img.shields.io/docker/stars/mekayelanik/fetch-mcp?style=flat-square&logo=docker"></a>
-  <a href="https://github.com/mekayelanik/fetch-mcp-docker/pkgs/container/fetch-mcp"><img alt="GHCR" src="https://img.shields.io/badge/GHCR-ghcr.io%2Fmekayelanik%2Ffetch-mcp-blue?style=flat-square&logo=github"></a>
-  <a href="https://github.com/mekayelanik/fetch-mcp-docker/blob/main/LICENSE"><img alt="License: GPL-3.0" src="https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square"></a>
+  <a href="https://github.com/MekayelAnik/fetch-mcp-docker/pkgs/container/fetch-mcp"><img alt="GHCR" src="https://img.shields.io/badge/GHCR-ghcr.io%2Fmekayelanik%2Ffetch-mcp-blue?style=flat-square&logo=github"></a>
+  <a href="https://github.com/MekayelAnik/fetch-mcp-docker/blob/main/LICENSE"><img alt="License: GPL-3.0" src="https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square"></a>
   <a href="https://hub.docker.com/r/mekayelanik/fetch-mcp"><img alt="Platforms" src="https://img.shields.io/badge/Platforms-amd64%20%7C%20arm64-lightgrey?style=flat-square"></a>
   <a href="https://github.com/MekayelAnik/fetch-mcp-docker/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/MekayelAnik/fetch-mcp-docker?style=flat-square"></a>
   <a href="https://github.com/MekayelAnik/fetch-mcp-docker/forks"><img alt="GitHub Forks" src="https://img.shields.io/github/forks/MekayelAnik/fetch-mcp-docker?style=flat-square"></a>
@@ -739,7 +739,7 @@ curl -X POST http://localhost:8060/mcp \
 
 ### Documentation
 - 📦 [NPM Package](https://www.npmjs.com/package/mcp-fetch-server)
-- 🔧 [GitHub Repository](https://github.com/mekayelanik/fetch-mcp-docker)
+- 🔧 [GitHub Repository](https://github.com/MekayelAnik/fetch-mcp-docker)
 - 🐳 [Docker Hub](https://hub.docker.com/r/mekayelanik/fetch-mcp)
 
 ### MCP Resources
@@ -750,8 +750,8 @@ curl -X POST http://localhost:8060/mcp \
 ### Getting Help
 
 **Docker Image Issues:**
-- [GitHub Issues](https://github.com/mekayelanik/fetch-mcp-docker/issues)
-- [Discussions](https://github.com/mekayelanik/fetch-mcp-docker/discussions)
+- [GitHub Issues](https://github.com/MekayelAnik/fetch-mcp-docker/issues)
+- [Discussions](https://github.com/MekayelAnik/fetch-mcp-docker/discussions)
 
 **General Questions:**
 - Check logs: `docker logs fetch-mcp`
@@ -847,6 +847,6 @@ Docker Image: GPL License - See [LICENSE](https://raw.githubusercontent.com/Meka
 
 <div align="center">
 
-[Report docker image related Bug](https://github.com/mekayelanik/fetch-mcp-docker/issues) • [Request Feature](https://github.com/mekayelanik/fetch-mcp-docker/issues) • [Contribute](https://github.com/mekayelanik/fetch-mcp-docker/pulls)
+[Report docker image related Bug](https://github.com/MekayelAnik/fetch-mcp-docker/issues) • [Request Feature](https://github.com/MekayelAnik/fetch-mcp-docker/issues) • [Contribute](https://github.com/MekayelAnik/fetch-mcp-docker/pulls)
 
 </div>
