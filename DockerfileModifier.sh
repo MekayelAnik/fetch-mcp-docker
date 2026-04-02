@@ -42,25 +42,25 @@ COPY ./resources/ /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/banner.sh
 
 # Install required APK packages
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories && \
-    echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    apk --update-cache --no-cache add bash shadow su-exec tzdata bc && \
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories && \\
+    echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \\
+    apk --update-cache --no-cache add bash shadow su-exec tzdata bc && \\
     rm -rf /var/cache/apk/*
 
 # Create node user with specific UID/GID if they don't exist
-RUN if ! id -u node >/dev/null 2>&1; then \
-        addgroup -g 1000 node && \
-        adduser -u 1000 -G node -D node; \
+RUN if ! id -u node >/dev/null 2>&1; then \\
+        addgroup -g 1000 node && \\
+        adduser -u 1000 -G node -D node; \\
     fi
 
 # Install Fetch MCP server
-RUN echo "Installing Fetch MCP server: ${FETCH_MCP_PKG}" && \
-    npm install -g ${FETCH_MCP_PKG} --loglevel verbose && \
+RUN echo "Installing Fetch MCP server: ${FETCH_MCP_PKG}" && \\
+    npm install -g ${FETCH_MCP_PKG} --loglevel verbose && \\
     echo "Package installed successfully"
 
 # Install Supergateway
-RUN echo "Installing Supergateway..." && \
-    npm install -g ${SUPERGATEWAY_PKG} --loglevel verbose && \
+RUN echo "Installing Supergateway..." && \\
+    npm install -g ${SUPERGATEWAY_PKG} --loglevel verbose && \\
     npm cache clean --force
 
 EOF
@@ -69,8 +69,8 @@ EOF
         if [ -n "$OTHER_NPM_DEPENDENCIES" ]; then
             cat << EOF
 # Install Other NPM Dependencies
-RUN echo "Installing other NPM Dependencies: ${OTHER_NPM_DEPENDENCIES}" && \
-    npm install -g ${OTHER_NPM_DEPENDENCIES} --loglevel verbose && \
+RUN echo "Installing other NPM Dependencies: ${OTHER_NPM_DEPENDENCIES}" && \\
+    npm install -g ${OTHER_NPM_DEPENDENCIES} --loglevel verbose && \\
     echo "Packages installed successfully"
 
 EOF
