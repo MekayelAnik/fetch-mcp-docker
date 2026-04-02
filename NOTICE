@@ -1,0 +1,14 @@
+This Docker image packages the following third-party software:
+
+fetch-mcp
+  - Source: https://www.npmjs.com/package/fetch-mcp
+  - License: MIT
+  - Copyright: See upstream repository
+
+Supergateway
+  - Source: https://github.com/nicobailey/supergateway
+  - License: MIT
+
+HAProxy
+  - Source: https://www.haproxy.org/
+  - License: GPL v2
