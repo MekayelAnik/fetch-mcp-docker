@@ -14,18 +14,6 @@
 
 ### Multi-Architecture Docker Image for Distributed Deployment
 
-<div align="left">
-
-<img alt="fetch-mcp" src="https://img.shields.io/badge/Fetch-MCP-FF6B6B?style=for-the-badge&logo=safari&logoColor=white" width="400">
-
-[![Docker Pulls](https://img.shields.io/docker/pulls/mekayelanik/fetch-mcp.svg?style=flat-square)](https://hub.docker.com/r/mekayelanik/fetch-mcp)
-[![Docker Stars](https://img.shields.io/docker/stars/mekayelanik/fetch-mcp.svg?style=flat-square)](https://hub.docker.com/r/mekayelanik/fetch-mcp)
-[![License](https://img.shields.io/badge/license-GPL-blue.svg?style=flat-square)](https://raw.githubusercontent.com/MekayelAnik/fetch-mcp-docker/refs/heads/main/LICENSE)
-
-**[NPM Package](https://www.npmjs.com/package/mcp-fetch-server)** • **[GitHub Repository](https://github.com/mekayelanik/fetch-mcp-docker)** • **[Docker Hub](https://hub.docker.com/r/mekayelanik/fetch-mcp)**
-
-</div>
-
 ---
 
 ## 📋 Table of Contents
