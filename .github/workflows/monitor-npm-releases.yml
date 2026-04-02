@@ -54,7 +54,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NPM_PACKAGE: 'fetch-mcp'
+  NPM_PACKAGE: 'mcp-fetch-server'
   NPM_REGISTRY: 'https://registry.npmjs.org'
   MAX_VERSIONS: '10'
   TZ: ${{ vars.TZ || 'Asia/Dhaka' }}
