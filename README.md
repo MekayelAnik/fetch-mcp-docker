@@ -158,6 +158,11 @@ docker run -d \
 
 | Variable | Default | Description |
 |:---------|:-------:|:------------|
+| `RATE_LIMIT` | `0` | Max requests per `RATE_LIMIT_PERIOD` per IP (`0` = disabled) |
+| `RATE_LIMIT_PERIOD` | `10s` | Sliding window for rate limiting (e.g., `10s`, `1m`, `1h`) |
+| `MAX_CONNECTIONS_PER_IP` | `0` | Max concurrent connections per IP (`0` = disabled) |
+| `IP_ALLOWLIST` | *(empty)* | Comma-separated IPs/CIDRs to allow (all others blocked) |
+| `IP_BLOCKLIST` | *(empty)* | Comma-separated IPs/CIDRs to block |
 | `DEBUG_MODE` | `false` | Enable debug mode (`true`, `false`, `verbose`) |
 
 ### Protocol Configuration
@@ -821,6 +826,14 @@ deploy:
       cpus: '1.0'
       memory: 512M
 ```
+
+### Rate Limiting and IP Access Control
+
+- **Rate limiting:** Set `RATE_LIMIT=100` to allow 100 requests per `RATE_LIMIT_PERIOD` (default `10s`) per IP. Exceeding the limit returns HTTP 429 with a `Retry-After` header.
+- **Connection limiting:** Set `MAX_CONNECTIONS_PER_IP=50` to cap concurrent connections per IP. Exceeding returns HTTP 429.
+- **IP blocklist:** Set `IP_BLOCKLIST=192.0.2.0/24,198.51.100.5` to block specific IPs/CIDRs. Blocked IPs receive HTTP 403.
+- **IP allowlist:** Set `IP_ALLOWLIST=10.0.0.0/8,192.168.1.0/24` to allow only listed IPs/CIDRs. All others receive HTTP 403. Localhost is always allowed.
+- All features default to disabled. Combine as needed — blocklist is checked before allowlist.
 
 ---
 
