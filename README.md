@@ -252,12 +252,12 @@ environment:
 
 ### Transport Compatibility
 
-| Client | HTTP | SSE | WebSocket | Recommended |
-|:-------|:----:|:---:|:---------:|:------------|
-| **VS Code (Cline/Roo-Cline)** | ✅ | ✅ | ❌ | HTTP |
-| **Claude Desktop** | ✅ | ✅ | ⚠️* | HTTP |
-| **Cursor** | ✅ | ✅ | ⚠️* | HTTP |
-| **Windsurf** | ✅ | ✅ | ⚠️* | HTTP |
+| Client | HTTP | SSE | Recommended |
+|:-------|:----:|:---:|:------------|
+| **VS Code (Cline/Roo-Cline)** | ✅ | ✅ | | HTTP |
+| **Claude Desktop** | ✅ | ✅ | | HTTP |
+| **Cursor** | ✅ | ✅ | | HTTP |
+| **Windsurf** | ✅ | ✅ | | HTTP |
 
 > ⚠️ *WebSocket support is experimental
 
@@ -624,6 +624,18 @@ services:
 ```
 
 ---
+
+---
+
+### Memory & Concurrency Tuning
+
+This image embeds **mcp-proxy** (sparfenyuk/mcp-proxy) as the stdio↔HTTP bridge.
+
+- `MCP_PROXY_STATELESS=false` (default): one stdio backend child is shared across **all** MCP sessions.
+- `HAPROXY_FRONTEND_MAXCONN` / `HAPROXY_SERVER_MAXCONN`: HAProxy-level caps. Defaults 64/16.
+- WebSocket transport is no longer supported (mcp-proxy upstream does not implement it).
+
+Root cause: supergateway 3.4.3 stateless mode leaks child processes (supercorp-ai/supergateway#108).
 
 ## Troubleshooting
 

@@ -4,11 +4,13 @@ set -ex
 REPO_NAME='fetch-mcp'
 BASE_IMAGE=$(cat ./build_data/base-image 2>/dev/null || echo "node:current-alpine")
 FETCH_MCP_VERSION=$(cat ./build_data/version 2>/dev/null || exit 1)
-SUPERGATEWAY_REPO=$(cat ./build_data/supergateway_repo 2>/dev/null || echo "supergateway")
-SUPERGATEWAY_VERSION=$(cat ./build_data/supergateway_version 2>/dev/null || echo "latest")
+# mcp-proxy: stdio<->StreamableHTTP/SSE bridge. Replaces supergateway.
+# Stateful by default (one stdio child shared across all sessions) - avoids
+# the spawn-per-request memory leak that affected supergateway in stateless
+# mode (supercorp-ai/supergateway#108).
+MCP_PROXY_PKG=$(cat ./build_data/mcp_proxy_version 2>/dev/null || echo "mcp-proxy")
 FETCH_MCP_REPO="mcp-fetch-server"
 FETCH_MCP_PKG="${FETCH_MCP_REPO}@${FETCH_MCP_VERSION}"
-SUPERGATEWAY_PKG="${SUPERGATEWAY_REPO}@${SUPERGATEWAY_VERSION}"
 DOCKERFILE_NAME="Dockerfile.$REPO_NAME"
 OTHER_NPM_DEPENDENCIES=$(cat ./build_data/npm_dependencies 2>/dev/null || echo "")
 
@@ -39,12 +41,14 @@ LABEL org.opencontainers.image.source="https://github.com/mekayelanik/fetch-mcp-
 
 # Copy the entrypoint script into the container and make it executable
 COPY ./resources/ /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/banner.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/banner.sh /usr/local/bin/healthcheck.sh \\
+    && mkdir -p /etc/haproxy \\
+    && mv -vf /usr/local/bin/haproxy.cfg.template /etc/haproxy/haproxy.cfg.template
 
 # Install required APK packages
 RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories && \\
     echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \\
-    apk --update-cache --no-cache add bash shadow su-exec tzdata bc && \\
+    apk --update-cache --no-cache add bash shadow su-exec tzdata bc haproxy netcat-openbsd openssl ca-certificates curl python3 py3-pip && \\
     rm -rf /var/cache/apk/*
 
 # Create node user with specific UID/GID if they don't exist
@@ -58,9 +62,11 @@ RUN echo "Installing Fetch MCP server: ${FETCH_MCP_PKG}" && \\
     npm install -g ${FETCH_MCP_PKG} --loglevel verbose && \\
     echo "Package installed successfully"
 
-# Install Supergateway
-RUN echo "Installing Supergateway..." && \\
-    npm install -g ${SUPERGATEWAY_PKG} --loglevel verbose && \\
+# Install mcp-proxy (replaces supergateway). Pure-Python via pip.
+RUN --mount=type=cache,target=/root/.cache/pip \\
+    echo "Installing ${MCP_PROXY_PKG}..." && \\
+    pip install --no-cache-dir --break-system-packages ${MCP_PROXY_PKG} && \\
+    mcp-proxy --version || true && \\
     npm cache clean --force
 
 EOF
@@ -88,12 +94,20 @@ ENV DEFAULT_LIMIT=0
 ENV FETCH_TIMEOUT=30000
 ENV MAX_REDIRECTS=5
 
+# mcp-proxy and HAProxy concurrency defaults (overridable at runtime).
+ENV MCP_PROXY_STATELESS=false
+ENV FETCH_MAX_MEM_MB=4096
+ENV HAPROXY_FRONTEND_MAXCONN=64
+ENV HAPROXY_SERVER_MAXCONN=16
+
+LABEL org.opencontainers.image.description="Fetch MCP Server (mcp-proxy stdio<->HTTP bridge)"
+
 # Expose the port
 EXPOSE \${PORT}
 
-# Health check using nc (netcat) to check if the port is open
-HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \\
-    CMD nc -z localhost \${PORT:-8060} || exit 1
+# L7 health check: HAProxy answers /healthz locally
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \\
+    CMD ["/usr/local/bin/healthcheck.sh"]
 
 # Set the entrypoint
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

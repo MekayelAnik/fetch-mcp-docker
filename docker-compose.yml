@@ -1,0 +1,28 @@
+services:
+  fetch-mcp:
+    image: mekayelanik/fetch-mcp:latest
+    container_name: fetch-mcp
+    environment:
+      - PORT=8060
+      - INTERNAL_PORT=38060
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - PROTOCOL=SHTTP
+      - ENABLE_HTTPS=false
+      - HTTP_VERSION_MODE=auto
+      - MCP_PROXY_STATELESS=false
+      - FETCH_MAX_MEM_MB=4096
+      - HAPROXY_FRONTEND_MAXCONN=64
+      - HAPROXY_SERVER_MAXCONN=16
+      # Fetch-specific
+      - DEFAULT_LIMIT=0
+      - FETCH_TIMEOUT=30000
+      - MAX_REDIRECTS=5
+      # Optional: require Bearer token auth at HAProxy layer
+      # - API_KEY=replace-with-strong-secret
+      # Optional: CORS origins (comma-separated, or * for all)
+      # - CORS=*
+    ports:
+      - "8060:8060"
+    restart: unless-stopped
